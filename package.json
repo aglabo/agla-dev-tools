@@ -1,0 +1,35 @@
+{
+  "name": "@aglabo/dev-tools",
+  "@(#)": "Development tools management package",
+  "version": "0.0.1",
+  "description": "Development tools management package for aglabo projects",
+  "private": true,
+  "keywords": [
+    "template",
+    "starter",
+    "oss",
+    "development"
+  ],
+  "author": "atsushifx",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aglabo/agla-dev-tools.git"
+  },
+  "type": "module",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=22",
+    "pnpm:": ">=11"
+  },
+  "scripts": {
+    "prepare": "bash ./scripts/setup-dev-env.sh"
+  },
+  "devDependencies": {
+    "commitlint": "^21.0.2",
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-conventional": "^21.0.2",
+    "secretlint": "^13.0.2",
+    "@secretlint/secretlint-rule-preset-recommend": "^13.0.2"
+  }
+}
