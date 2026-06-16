@@ -1,6 +1,6 @@
 @ECHO off
-:: src: ./bin/secretlint.cmd
-:: @(#) : Wrapper script for secretlint (Windows)
+:: src: ./bin/ls-lint.cmd
+:: @(#) : Wrapper script for ls-lint (Windows)
 ::
 :: Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
 ::
@@ -8,5 +8,5 @@
 :: https://opensource.org/licenses/MIT
 SETLOCAL
 CALL "%~dp0libs\resolve-paths.lib.cmd" "%~dp0"
-CALL "%BINPATH%\secretlint.CMD" %*
+CALL "%BINPATH%\ls-lint.CMD" %*
 ENDLOCAL
