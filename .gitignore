@@ -1,0 +1,102 @@
+# src: .gitignore
+# @(#) : main ignore settings: template
+#
+# Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
+#
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+# cspell:words worktrees cocoindex codegraph
+
+##  General
+#   OS specific files
+.DS_Store
+thumbs.db
+
+#   logs, patches
+*.log
+*.diff
+*.patch
+
+#   history, cache
+.history/
+.cache/
+# **/*cache
+
+
+#   backup/swap/temp
+$~*
+~*
+*~
+*.tmp
+*.swp
+*.lock
+
+# session files
+*session.json
+*session
+**/*session.json
+**/*session
+
+# .env files
+.env*
+.env.*
+
+# release
+releases/*
+!releases/.keep
+
+##  Git
+!**/.gitignore
+
+## Development tools (installed locally)
+.tools/
+
+## Worktrees
+# WorkTree base directory
+.worktrees/
+
+## AI generated files
+
+## Coding AI depended
+# SDD (Spec-Driven Development) files
+
+# claude code setting
+.claude/*
+
+# settings
+!.claude/**/settings.json
+
+# agents can tracking
+!**/CLAUDE*.md
+!.claude/agents/
+!.claude/agents/**
+!.claude/rules/
+!.claude/rules/**
+!.claude/commands/
+!.claude/commands/**
+
+# MCP server dependency files
+.cocoindex_code/
+.serena/
+.lsmcp/
+.codegraph/*
+
+## Temporary directories are never tracked
+temp/
+tmp/
+**/temp/
+**/tmp/
+
+##  Editor
+#   VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+!.vscode/cspell*
+
+## Node
+node_modules/
