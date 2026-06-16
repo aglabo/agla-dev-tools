@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+BINPATH="$(dirname "$0")/../node_modules/.bin"
+exec "$BINPATH/concurrently" "$@"
