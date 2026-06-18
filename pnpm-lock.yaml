@@ -17,6 +17,9 @@ importers:
       '@commitlint/types':
         specifier: ^21.0.1
         version: 21.0.1
+      '@ls-lint/ls-lint':
+        specifier: ^2.3.1
+        version: 2.3.1
       '@secretlint/secretlint-rule-preset-recommend':
         specifier: ^13.0.2
         version: 13.0.2
@@ -126,6 +129,12 @@ packages:
         optional: true
       conventional-commits-parser:
         optional: true
+
+  '@ls-lint/ls-lint@2.3.1':
+    resolution: {integrity: sha512-vPe6IDByQnQRTxcAYjTxrmga/tSIui50VBFTB5KIJWY3OOFmxE2VtymjeSEfQfiMbhZV/ZPAqYy2lt8pZFQ0Rw==}
+    cpu: [x64, arm64, s390x, ppc64le]
+    os: [darwin, linux, win32]
+    hasBin: true
 
   '@secretlint/config-creator@13.0.2':
     resolution: {integrity: sha512-wEHE/x7jeaWnDqVhzUg3qLsnl3NOQTA2fVnxwc0Z7dn3SOSh5sEKFr6xTp/LhZxyuHnKJltlcF085UDUFOoqYQ==}
@@ -778,6 +787,8 @@ snapshots:
       semver: 7.8.4
     optionalDependencies:
       conventional-commits-parser: 6.4.0
+
+  '@ls-lint/ls-lint@2.3.1': {}
 
   '@secretlint/config-creator@13.0.2':
     dependencies:
