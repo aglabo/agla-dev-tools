@@ -36,6 +36,7 @@
 ## Root configs
 !**/package.json
 !**/pnpm-lock.yaml
+!**/pnpm-workspace.yaml
 !**/renovate.json
 !**/lefthook.yml
 !**/dprint.jsonc
