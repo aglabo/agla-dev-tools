@@ -20,8 +20,8 @@
 !.github/**
 
 # Allow profile (organization README)
-!/profile/
-!/profile/**
+!profile/
+!profile/**
 
 # Allow other ignore
 !*ignore
@@ -57,13 +57,17 @@
 !configs/**/*.mjs
 
 # runners & scripts
-!/runners
-!/runners/**
-!/runners/**/*.sh
-!/scripts
-!/scripts/**
-!/scripts/**/*.sh
-!/scripts/**/*.ts
+!runners
+!runners/**
+!runners/**/*.sh
+!scripts
+!scripts/**
+!scripts/**/*.sh
+!scripts/**/*.ts
+
+# bin (tool wrappers, libs & tests)
+!bin
+!bin/**
 
 ## AI Agents
 # General
