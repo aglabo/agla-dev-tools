@@ -3,9 +3,9 @@
 # shellcheck disable=SC2016
 
 # ─── Internal Helpers
-# pwd = bin/libs/__tests__/integration/ (--execdir @specfile)
+# resolve paths from the spec file location (independent of the working directory)
 
-_BIN_DIR="$(cd "../.." && pwd)"
+_BIN_DIR="$(cd "$(dirname "$SHELLSPEC_SPECFILE")/../.." && pwd)"
 _LIB="${_BIN_DIR}/resolve-paths.lib.sh"
 
 # ─── 直接実行 — NODE_PATH を realpath で出力

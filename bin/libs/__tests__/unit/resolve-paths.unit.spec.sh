@@ -3,7 +3,7 @@
 # shellcheck disable=SC2016
 
 # ─── Internal Helpers
-_LIB="$(cd "$(pwd)/../.." && pwd)/resolve-paths.lib.sh"
+_LIB="$(cd "$(dirname "$SHELLSPEC_SPECFILE")/../.." && pwd)/resolve-paths.lib.sh"
 
 # ─── _normalize_path() — path normalization
 
