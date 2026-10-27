@@ -24,4 +24,3 @@ summary: >
 - Upgrade the Markdown plugin and development dependencies; add pnpm workspace configuration.
 - Add an empty MCP server configuration and assign repository-wide code ownership.
 - Correct the pnpm engine key and raise its minimum version.
--
