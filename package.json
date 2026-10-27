@@ -1,6 +1,6 @@
 {
   "name": "@aglabo/dev-tools",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "private": true,
   "description": "Development tools management package for aglabo projects",
   "keywords": [
