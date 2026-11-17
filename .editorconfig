@@ -1,5 +1,5 @@
-# src: .editorconfig
-# @(#) : editorconfig template with shfmt settings
+# src: ./.editorconfig
+# @(#) : editorconfig template (shfmt reads the shell script settings from here)
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
@@ -47,14 +47,14 @@ tab_width = 2
 #  shell script formatter settings
 # --language-dialect
 shell_variant      = bash
-simplify           = true
-binary_next_line   = true
+simplify           = false
+binary_next_line   = false
 # --case-indent
-switch_case_indent = true
-space_redirects    = true
+switch_case_indent = false
+space_redirects    = false
 keep_padding       = true
 # --func-next-line
-function_next_line = true
+function_next_line = false
 # --minify
 minify             = false
 
