@@ -2,7 +2,7 @@
 :: src: ./bin/secretlint.cmd
 :: @(#) : Wrapper script for secretlint (Windows)
 ::
-:: Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
+:: Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 ::
 :: This software is released under the MIT License.
 :: https://opensource.org/licenses/MIT
