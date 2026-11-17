@@ -11,7 +11,7 @@ We hope your ideas will help make this project even better.
 
 ### 1. Report an Issue
 
-- Please use [Issues](https://github.com/<Owner/Repository>/issues) to report bugs or suggest features.
+- Please use [Issues](https://github.com/aglabo/agla-dev-tools/issues) to report bugs or suggest features.
 - Add enough details (steps, expected behavior, actual behavior).
 
 ### 2. Submit a Pull Request
@@ -27,25 +27,43 @@ We hope your ideas will help make this project even better.
 ### Setup
 
 ```bash
-git clone https://github.com/<Owner/Repository>.git
+git clone https://github.com/aglabo/agla-dev-tools.git
+cd agla-dev-tools
+pnpm install   # the `prepare` script runs scripts/setup-dev-env.sh
 ```
+
+Requirements: Node.js 24+, pnpm 12+, and bash.
 
 ### Testing
 
-When you make changes, please test:
+When you make changes, please run the checks that match your changes:
 
-- **textlint**
+- **shellspec** (`pnpm run test:sh`)
+  Run the tests for shell scripts.
+- **shellcheck** (`pnpm run lint:sh`)
+  Lint shell scripts.
+- **shfmt** (`pnpm run check:sh`)
+  Check the format of shell scripts.
+- **jactionlint / ghalint** (`pnpm run lint:gha`)
+  Lint GitHub Actions workflows.
+- **textlint** (`pnpm run lint:text`)
   Check writing quality for technical documentation.
-- **markdownlint**
+- **markdownlint** (`pnpm run lint:markdown`)
   Check if Markdown format is correct.
+- **cspell** (`pnpm run lint:spells`)
+  Check spelling.
 
 ### Code style and format
 
 We use these tools:
 
-- Formatter: dprint
-- Linters: textlint, markdownlint (with `markdownlint-cli2`)
+<!-- textlint-disable ja-technical-writing/max-comma -->
+
+- Formatters: dprint (`pnpm run format:dprint`), shfmt (`pnpm run format:sh`)
+- Linters: shellcheck, jactionlint, ghalint, textlint, markdownlint
 - Spell checker: cspell
+
+<!-- textlint-enable ja-technical-writing/max-comma -->
 
 ## 📜 Code of Conduct
 
@@ -61,9 +79,9 @@ All contributors must follow our [CODE_OF_CONDUCT.md](https://github.com/aglabo/
 
 <!-- textlint-disable @textlint-ja/ai-writing/no-ai-list-formatting -->
 
-- [🐛 Report a Bug](https://github.com/<Owner/Repository>/issues/new?template=bug_report.yml)
-- [✨ Request a Feature](https://github.com/<Owner/Repository>/issues/new?template=feature_request.yml)
-- [💬 Open a Topic](https://github.com/<Owner/Repository>/issues/new?template=open_topic.yml)
-- [🔀 Create a Pull Request](https://github.com/<Owner/Repository>/compare)
+- [🐛 Report a Bug](https://github.com/aglabo/agla-dev-tools/issues/new?template=bug_report.yml)
+- [✨ Request a Feature](https://github.com/aglabo/agla-dev-tools/issues/new?template=feature_request.yml)
+- [💬 Open a Topic](https://github.com/aglabo/agla-dev-tools/issues/new?template=open_topic.yml)
+- [🔀 Create a Pull Request](https://github.com/aglabo/agla-dev-tools/compare)
 
 <!-- textlint-enable -->
