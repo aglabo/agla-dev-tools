@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# src: runners/run-textlint.sh
+# src: ./runners/run-textlint.sh
 # @(#) : textlint runner
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>

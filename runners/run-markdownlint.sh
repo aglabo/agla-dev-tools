@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# src: runners/run-markdownlint.sh
+# src: ./runners/run-markdownlint.sh
 # @(#) : markdownlint runner
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>

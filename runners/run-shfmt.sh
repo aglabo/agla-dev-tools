@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # src: ./runners/run-shfmt.sh
-# @(#) : shfmt runner
+# @(#) : shfmt runner (formatting rules come from .editorconfig)
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
@@ -41,8 +41,8 @@ main() {
   fi
   targets=("${targets[@]//\\//}")
   case "$mode" in
-  list) (cd "$PROJECT_ROOT" && shfmt -ln bash -i 2 -l -- "${targets[@]}") ;;
-  format) (cd "$PROJECT_ROOT" && shfmt -ln bash -i 2 -w -- "${targets[@]}") ;;
+  list) (cd "$PROJECT_ROOT" && shfmt -l -- "${targets[@]}") ;;
+  format) (cd "$PROJECT_ROOT" && shfmt -w -- "${targets[@]}") ;;
   esac
 }
 if [[ ${BASH_SOURCE[0]} == "$0" ]]; then
