@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # src: ./scripts/prepare-commit-msg.sh
-# @(#) : Prepare commit message using Codex CLI
+# @(#) : Prepare commit message using AI (Codex, Claude, or similar)
 #
-# Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
+# Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
@@ -77,11 +77,11 @@ readonly SCRIPT_DIR
 OUTPUT_FILE=""
 
 ##
-# @description AI model name for commit message generation (default: gpt-6-luna)
-DEFAULT_AI_MODEL="gpt-6-luna"
+# @description AI model name for commit message generation (default: opus)
+DEFAULT_AI_MODEL="opus"
 
-###
-# @description AI model name for commit message generation (default: gpt-6-luna)
+##
+# @description Currently selected AI model (initialized from DEFAULT_AI_MODEL)
 AI_MODEL="${DEFAULT_AI_MODEL}"
 
 ##
@@ -122,8 +122,8 @@ Arguments:
 
 Options:
   --output FILE, -o FILE      Write commit message to FILE instead of stdout
-  --model MODEL               AI model name (default: gpt-6-luna)
-                              Supported: gpt-*, o1-*, claude-*, haiku, sonnet, opus
+  --model MODEL               AI model name (default: opus)
+                              Supported: gpt-*, o1-*, claude-*, haiku, sonnet, opus, fable, copilot/<model>, <org>/<model>
   -h, --help                  Show this help message
 
 Examples:
@@ -147,7 +147,7 @@ EOF
 # @description Parse command-line options and set configuration
 # @arg $@ string Command-line arguments to parse
 # @option --output FILE|-o FILE Write commit message to FILE instead of stdout
-# @option --model MODEL Specify AI model name (default: gpt-6-luna)
+# @option --model MODEL Specify AI model name (default: opus)
 # @option -h|--help Display usage information
 # @arg $1 string When symlinked as a git hook: commit message file (used as output file)
 # @arg $2 string When symlinked as a git hook: message source (ignored)
@@ -232,7 +232,7 @@ has_existing_message() {
 make_context_block() {
   echo ""
   echo "===== GIT LOGS ====="
-  git log --oneline -10 || echo "No logs available."
+  git log --oneline -"${MAX_LOG_ENTRIES}" || echo "No logs available."
   echo ""
 
   echo "===== GIT DIFF ====="
@@ -251,7 +251,8 @@ make_context_block() {
 #
 # **Supported Providers:**
 # - OpenAI (gpt-*, o1-*) -> codex exec -s read-only --color never --model <model>
-# - Anthropic (claude-*, haiku, sonnet, opus) -> claude -p --model <model>
+# - Anthropic (claude-*, haiku, sonnet, opus, fable) -> claude -p --model <model>
+# - GitHub Copilot (copilot/<model>) -> copilot --model <model>
 # - OpenCode (org/model) -> opencode run --model <model>
 #
 # **Safety Notes:**
@@ -259,7 +260,7 @@ make_context_block() {
 # - All model names validated before array creation
 # - Unknown models exit with error
 #
-# @arg $1 string AI model name (default: gpt-6-luna)
+# @arg $1 string AI model name (default: opus)
 # @return 0 If model is supported and AI_COMMAND is set
 # @return 1 If model is unsupported
 # @global AI_COMMAND Array populated with (command arg1 arg2 ...)
@@ -356,7 +357,7 @@ generate_commit_message() {
   local diff_output
 
   diff_output=$({
-    cat .claude/agents/commit-message-generator.md
+    cat "${AGENT_TEMPLATE_PATH}"
     echo ""
     make_context_block
   })

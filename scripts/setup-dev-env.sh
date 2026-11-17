@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # src: ./scripts/setup-dev-env.sh
-# @(#) : Install lefthook in local development environment only
+# @(#) : Set up local dev environment (lefthook hooks, shellspec, aglabo tools)
 #
-# Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
+# Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT

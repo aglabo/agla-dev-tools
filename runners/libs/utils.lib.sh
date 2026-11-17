@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# utils.lib.sh - common utility library for runner scripts
+# src: ./runners/libs/utils.lib.sh
+# @(#) : common utility library for runner scripts
 # Provides helpers shared by multiple runners
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
@@ -10,6 +11,25 @@
 # Guard against double sourcing
 [[ -n "${_UTILS_LIB_SH:-}" ]] && return 0
 readonly _UTILS_LIB_SH=1
+
+# Exit code returned by runners when no config file is found (EX_CONFIG)
+# shellcheck disable=SC2034 # used by the scripts that source this library
+readonly EXIT_CONFIG_NOT_FOUND=78
+
+#
+# @description Format the one-line message for a failed resolve_config_file call.
+#              resolve_config_file already lists the searched paths on stderr;
+#              this is the short summary runners print before returning EXIT_CONFIG_NOT_FOUND
+# @arg $1 int Exit status of resolve_config_file
+# @arg $2 string Config file path relative to the global config directory
+# @arg $3 string Local config file path relative to PROJECT_ROOT
+# @stdout Message text (without the "Error: " prefix)
+# @exitcode 0 always
+#
+format_config_not_found() {
+  local __status="$1" __global_relpath="$2" __local_relpath="$3"
+  echo "config file not found (status ${__status}): global '${__global_relpath}' or local '${__local_relpath}'"
+}
 
 #
 # @description Resolve the global (user) config directory.

@@ -4,8 +4,8 @@
   "private": true,
   "description": "Development tools management package for aglabo projects",
   "keywords": [
-    "template",
-    "starter",
+    "dev-tools",
+    "shell",
     "oss",
     "development"
   ],
@@ -27,9 +27,9 @@
     "lint:sh": "bash runners/run-shellcheck.sh ",
     "test:sh": "bash runners/run-shellspec.sh ",
     "test:sh:all": "bash runners/run-shellspec.sh all",
-    "lint:gha": "concurrently \"pnpm run lint:gha:actions\" \"pnpm run lint:gha:workflows\"",
+    "lint:gha": "concurrently --raw --group \"pnpm run lint:gha:actions\" \"pnpm run lint:gha:workflows\"",
     "lint:gha:actions": "bash runners/run-actionlint.sh ",
-    "lint:gha:workflows": "concurrently \"bash runners/run-ghalint.sh run\" \"bash runners/run-ghalint.sh act\"",
+    "lint:gha:workflows": "concurrently --raw --group \"bash runners/run-ghalint.sh run\" \"bash runners/run-ghalint.sh act\"",
     "lint:spells": "cspell --config .vscode/cspell.json --cache --cache-location .cache/cspell/cSpellCache ",
     "lint:text": "bash runners/run-textlint.sh ",
     "lint:markdown": "bash runners/run-markdownlint.sh "
@@ -39,13 +39,13 @@
     "@commitlint/config-conventional": "^21.2.4",
     "@commitlint/types": "^21.2.3",
     "@ls-lint/ls-lint": "^2.3.2",
-    "@secretlint/secretlint-rule-preset-recommend": "^13.0.7",
+    "@secretlint/secretlint-rule-preset-recommend": "^13.1.0",
     "commitlint": "^21.2.4",
-    "concurrently": "^10.0.6",
-    "rimraf": "^6.1.3",
-    "secretlint": "^13.0.7"
+    "concurrently": "^10.0.7",
+    "rimraf": "^6.1.4",
+    "secretlint": "^14.0.1"
   },
-  "packageManager": "pnpm@12.15.0",
+  "packageManager": "pnpm@12.21.0",
   "engines": {
     "node": ">=24",
     "pnpm": ">=12"

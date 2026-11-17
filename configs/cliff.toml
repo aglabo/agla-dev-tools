@@ -1,5 +1,5 @@
 # src: ./configs/cliff.toml
-# @(#): git-cliff configs:
+# @(#) : git-cliff configuration
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
@@ -47,10 +47,6 @@ postprocessors = [
   # Replace the placeholder <REPO> with a URL.
   # { pattern = '<REPO>', replace = "https://github.com/orhun/git-cliff" },
 ]
-# render body even when there are no releases to process
-# render_always = true
-# output file path
-# output = "test.md"
 
 [git]
 # Parse commits according to the conventional commits specification.
@@ -84,13 +80,13 @@ commit_parsers = [
 
   # docs 型（docs: / docs(scope): / docs/config: すべて）
   { message = "^docs", group = "<!-- 02 --> Documentation" },
-  # ﾄﾞhｷLｭ・∂篤g系 scope は型を問わず集約する
+  # Documentation-related scopes are grouped regardless of commit type
   { message = "^\\w+\\((docs|website|user-guide|developer-guide|readme|changelog|license)[/)]", group = "<!-- 02 --> Documentation" },
-  # ﾄﾞhｷLｭ・∂篤gｻTｲCﾄgの依存更新
+  # Dependency updates for documentation sites
   { message = "(?i)^deps.*(docs|website|docusaurus)", group = "<!-- 02 --> Documentation" },
 
   { message = "dependabot", skip = true },
-  # 真のﾏ}ｰ[ｼﾞWｺRﾐ~ｯbﾄg（squash ではない）は変更内容を持たない
+  # Real merge commits (not squash) carry no change content
   { message = "^Merge branch", skip = true },
 
   { body = ".*security", group = "<!-- 10 --> Security" },

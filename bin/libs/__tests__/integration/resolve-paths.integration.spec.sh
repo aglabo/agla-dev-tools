@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# resolve-paths.spec.sh — integration tests for bin/libs/resolve-paths.lib.sh
+# resolve-paths.integration.spec.sh — integration tests for bin/libs/resolve-paths.lib.sh
 # shellcheck disable=SC2016
 
 # ─── Internal Helpers

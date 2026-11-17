@@ -1,4 +1,4 @@
-# .shellspec - ShellSpec project configuration
+# src: ./.shellspec
 # @(#) : ShellSpec configuration - unified testing options
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
@@ -16,7 +16,7 @@
 # ============================================================================
 
 # === Base Configuration ===
-# Core testing setup: helpers, sandbox, and example handling
+# Core testing setup: shell, spec file pattern, and default path
 
 # shell
 --shell bash

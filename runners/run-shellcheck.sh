@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# src: ./scripts/run-shellcheck.sh
+# src: ./runners/run-shellcheck.sh
 # @(#) : shellcheck runner
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>

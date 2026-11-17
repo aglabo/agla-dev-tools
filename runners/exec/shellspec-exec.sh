@@ -22,7 +22,7 @@ readonly TEST_TYPES=("all" "unit" "functional" "integration" "system" "e2e")
 # Test type used when the caller names no target (`pnpm run test:sh`)
 readonly DEFAULT_TEST_TYPE='all'
 
-# Directory name that roots every spec tree (runners/__tests__/unit/... etc.)
+# Directory name that roots every spec tree (e.g. bin/libs/__tests__/unit/...)
 readonly TESTS_DIR='__tests__'
 
 # Arguments left over after parse_options() consumed the flags it owns.
@@ -80,7 +80,7 @@ is_spec_glob() {
 
 #
 # @description Expand a glob path pattern to matching spec file paths
-# @arg $1 string Glob path pattern (e.g. runners/libs/tests/unit/*.spec.sh)
+# @arg $1 string Glob path pattern (e.g. bin/libs/__tests__/unit/*.spec.sh)
 # @stdout List of matching spec file paths
 # @exitcode 0 always (warns if no match)
 #
@@ -237,7 +237,7 @@ run_shellspec() {
 #   main unit                         # Run unit tests (auto-resolved)
 #   main integration                  # Run integration tests (auto-resolved)
 #   main all                          # Run all tests
-#   main runners/libs/tests/unit/*.spec.sh  # Run spec glob
+#   main bin/libs/__tests__/unit/*.spec.sh  # Run spec glob
 #   main test.spec.sh --repair        # Run with ShellSpec options
 #
 main() {

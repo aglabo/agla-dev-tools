@@ -1,43 +1,76 @@
-# OSS Project Starter Template
+# agla-dev-tools
 
-This template helps you quickly launch a modern open source project.
-It comes with best practices and essential tools pre-configured.
+Development tools management package for aglabo projects.
+It bundles tool wrappers (`bin/`), lint/test runners (`runners/`), shared tool configs (`configs/`), and Git hooks.
 
 ---
 
 ## Features
 
-- Easy development environment setup via PowerShell scripts
-  - Lightweight setup using Scoop & pnpm for Windows
-- Includes common boilerplate files such as `.editorconfig`, `.gitignore`, and more
-  - Minimal configuration with flexibility for future extensions
-- Lightweight Git hook environment powered by `lefthook`
-  - Prevents credential leakage using tools like `gitleaks` and `secretlint`
+<!-- textlint-disable ja-technical-writing/max-comma -->
+
+- Tool wrappers in `bin/` that resolve pnpm-installed commands (POSIX shell and Windows `.cmd`)
+  - `commitlint`, `concurrently`, `ls-lint`, `rimraf`, `secretlint`
+- Runner scripts in `runners/` for linting, formatting, and testing
+  - `jactionlint`, `ghalint`, `markdownlint`, `shellcheck`, `shellspec`, `shfmt`, `textlint`, `betterleaks`
+- Shared tool configs in `configs/` (betterleaks, git-cliff, commitlint, secretlint, shellcheck)
+- Git hooks powered by `lefthook`
+  - `pre-commit`: secret scanning with `betterleaks` and `secretlint`
+  - `prepare-commit-msg`: AI-generated commit message draft (`scripts/prepare-commit-msg.sh`)
+  - `commit-msg`: Conventional Commits check with `commitlint`
+
+<!-- textlint-enable ja-technical-writing/max-comma -->
 
 ## Getting Started
 
-1. Fork this template repository to your own GitHub account.
-2. Customize it as needed (e.g., change the name in the `LICENSE` file to your GitHub handle).
-3. When creating a new repository, select this template as a base.
-4. You'll get a ready-to-use repository with all essential configurations preloaded.
+Requirements: Node.js 24+, pnpm 12+, and bash.
+
+```bash
+git clone https://github.com/aglabo/agla-dev-tools.git
+cd agla-dev-tools
+pnpm install   # the `prepare` script runs scripts/setup-dev-env.sh
+```
+
+`scripts/setup-dev-env.sh` sets up the local environment (lefthook hooks, shellspec, aglabo tools).
+It does nothing in CI.
+
+## Commands
+
+| Command                                     | Description                                |
+| ------------------------------------------- | ------------------------------------------ |
+| `pnpm run scan:secrets`                     | Scan for secrets (secretlint, betterleaks) |
+| `pnpm run check:sh` / `pnpm run format:sh`  | Check / format shell scripts (shfmt)       |
+| `pnpm run lint:sh`                          | Lint shell scripts (shellcheck)            |
+| `pnpm run test:sh` / `pnpm run test:sh:all` | Run ShellSpec tests                        |
+| `pnpm run lint:gha`                         | Lint GitHub Actions (jactionlint, ghalint) |
+| `pnpm run lint:text` / `lint:markdown`      | Lint documents (textlint, markdownlint)    |
+| `pnpm run lint:spells`                      | Spell check (cspell)                       |
+| `pnpm run check:dprint` / `format:dprint`   | Check / format with dprint                 |
 
 ## Included Tools
 
-| Tool       | Description                                    |
-| ---------- | ---------------------------------------------- |
-| lefthook   | Git commit hook manager                        |
-| delta      | Visual Git diff viewer                         |
-| commitlint | Linting for commit message format              |
-| gitleaks   | Detects secrets and credentials in source code |
-| secretlint | Static analysis tool to catch secrets in files |
-| cspell     | Spellchecker for code and documentation        |
-| dprint     | Fast and extensible code formatter (optional)  |
+| Tool         | Description                                    |
+| ------------ | ---------------------------------------------- |
+| lefthook     | Git hook manager                               |
+| commitlint   | Commit message format linting                  |
+| betterleaks  | Detects secrets and credentials in the repo    |
+| secretlint   | Static analysis tool to catch secrets in files |
+| ls-lint      | File and directory name linting                |
+| shellcheck   | Static analysis for shell scripts              |
+| shfmt        | Shell script formatter                         |
+| shellspec    | BDD testing framework for shell scripts        |
+| jactionlint  | GitHub Actions workflow linter                 |
+| ghalint      | GitHub Actions security linter                 |
+| textlint     | Text linting for documents                     |
+| markdownlint | Markdown linting                               |
+| cspell       | Spellchecker for code and documentation        |
+| dprint       | Code formatter                                 |
 
 > **Note**
-> These tools are installed independently using Scoop or pnpm and are not bundled with the repository.
-> You are responsible for managing their versions and keeping them up to date.
+> `commitlint`, `concurrently`, `ls-lint`, `rimraf`, and `secretlint` are installed by pnpm.
+> The other tools are installed separately and must be available on `PATH`.
 
 ## License
 
-This template is licensed under the MIT License.
+This project is licensed under the MIT License.
 For more details, see [LICENSE](./LICENSE).

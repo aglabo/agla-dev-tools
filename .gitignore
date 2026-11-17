@@ -1,7 +1,7 @@
-# src: .gitignore
+# src: ./.gitignore
 # @(#) : main ignore settings: agla-dev-tools
 #
-# Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
+# Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
@@ -46,6 +46,7 @@
 !configs/
 !configs/**
 !configs/**/*.json
+!configs/**/*.jsonc
 !configs/**/*.yml
 !configs/**/*.yaml
 !configs/**/*.toml
@@ -66,6 +67,13 @@
 !/bin
 !/bin/**
 
+# Documents
+!/docs/
+!/docs/**/
+!/docs/**/*.md
+!/docs/**/*.mdx
+
+
 ## AI Agents
 # General
 !**/AGENT.md
@@ -74,8 +82,6 @@
 !**/CLAUDE*.md
 
 # allowlist details: .claude/.gitignore
-!.claude/
-!**/CLAUDE*.md
 !.claude/
 !.claude/agents/
 !.claude/agents/**
@@ -101,8 +107,10 @@
 !**/.gitignore
 
 
-## Deny rules (keep last)
-# default deny rules
+# ------------------------------------------------------------ ##
+##  Re-exclude: secrets and generated files                      ##
+##  Must stay last: these rules undo the broad allow rules above ##
+## ------------------------------------------------------------ ##
 
 #   OS specific files
 .DS_Store
@@ -132,6 +140,16 @@ thumbs.db
 #   .env files
 **/.env*
 !.env.example
+
+
+#   API keys / credentials
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+**/*apikey*
+**/*api-key*
+**/*api_key*
 
 #   temporary directories
 **/temp

@@ -11,7 +11,7 @@
 
 ### 1. Issue の報告
 
-- バグ報告や機能提案は、[Issue](https://github.com/<Owner/Repository>/issues) にてお願いいたします。
+- バグ報告や機能提案は、[Issue](https://github.com/aglabo/agla-dev-tools/issues) にてお願いいたします。
 - 報告の際は、再現手順や期待される動作、実際の動作など、詳細な情報を提供してください。
 
 ### 2. プルリクエストの提出
@@ -29,25 +29,43 @@
 次の手順で、開発環境をセットアップします。
 
 ```bash
-git clone https://github.com/<Owner/Repository>.git
+git clone https://github.com/aglabo/agla-dev-tools.git
+cd agla-dev-tools
+pnpm install   # `prepare` スクリプトが scripts/setup-dev-env.sh を実行します
 ```
+
+必要環境は Node.js 24 以上、pnpm 12 以上、bash です。
 
 ### テスト
 
-変更を加えた際は、以下のコマンドでテストを実行し、既存の機能が影響を受けていないことを確認してください。
+変更を加えた際は、変更内容に応じて以下のコマンドを実行し、既存の機能が影響を受けていないことを確認してください。
 
-- textlint
+- shellspec (`pnpm run test:sh`)
+  シェルスクリプトのテストを実行します。
+- shellcheck (`pnpm run lint:sh`)
+  シェルスクリプトを静的解析します。
+- shfmt (`pnpm run check:sh`)
+  シェルスクリプトの書式を検査します。
+- jactionlint / ghalint (`pnpm run lint:gha`)
+  GitHub Actions ワークフローを検証します。
+- textlint (`pnpm run lint:text`)
   技術文書として読みやすく、表現上の問題がないかを検証します。
-- markdownlint
-  マークダウン形式のテキストの、マークダウンが正しく設定されているか確認します。
+- markdownlint (`pnpm run lint:markdown`)
+  マークダウン形式のテキストが正しく記述されているか確認します。
+- cspell (`pnpm run lint:spells`)
+  スペルを検査します。
 
 ### コードスタイルとフォーマット
 
 このプロジェクトでは、コードのフォーマット、リントに以下を使用しています。
 
-- コードフォーマット: dprint
-- リント: textlint, markdownlint (コマンドラインツールとして:markdownlint-cli2)
+<!-- textlint-disable ja-technical-writing/max-comma -->
+
+- コードフォーマット: dprint (`pnpm run format:dprint`)、shfmt (`pnpm run format:sh`)
+- リント: shellcheck, jactionlint, ghalint, textlint, markdownlint
 - スペルチェック: cspell
+
+<!-- textlint-enable ja-technical-writing/max-comma -->
 
 ## 行動規範
 
@@ -63,9 +81,9 @@ git clone https://github.com/<Owner/Repository>.git
 
 <!-- textlint-disable @textlint-ja/ai-writing/no-ai-list-formatting -->
 
-- [🐛 バグ報告を作成する](https://github.com/<Owner/Repository>/issues/new?template=bug_report.yml)
-- [✨ 機能提案を作成する](https://github.com/<Owner/Repository>/issues/new?template=feature_request.yml)
-- [💬 自由トピックを投稿する](https://github.com/<Owner/Repository>/issues/new?template=open_topic.yml)
-- [🔀 Pull Request を作成する](https://github.com/<Owner/Repository>/compare)
+- [🐛 バグ報告を作成する](https://github.com/aglabo/agla-dev-tools/issues/new?template=bug_report.yml)
+- [✨ 機能提案を作成する](https://github.com/aglabo/agla-dev-tools/issues/new?template=feature_request.yml)
+- [💬 自由トピックを投稿する](https://github.com/aglabo/agla-dev-tools/issues/new?template=open_topic.yml)
+- [🔀 Pull Request を作成する](https://github.com/aglabo/agla-dev-tools/compare)
 
 <!-- textlint-enable -->

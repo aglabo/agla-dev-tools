@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 # src: ./bin/rimraf
-# @(#) : Wrapper script for commitlint
+# @(#) : Wrapper script for rimraf
 #
-# Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
+# Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT

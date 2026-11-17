@@ -1,10 +1,10 @@
 # shellcheck shell=sh
 # src: ./bin/libs/resolve-paths.lib.sh
-# @(#) : Shared library for bin shims — defines resolve_paths()
+# @(#) : Shared library for bin wrappers — defines resolve_paths()
 # When sourced: sets BINPATH and NODE_PATH as exports via resolve_paths().
 # When executed directly: prints NODE_PATH realpath to stdout.
 #
-# Copyright (c) 2026- atsushifx <http://github.com/atsushifx>
+# Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
@@ -44,6 +44,9 @@ main() {
   }
   _resolve_node_path "$1"
 }
+
+# Disable glob expansion of arguments by MSYS bash on Windows (exported so child processes inherit it)
+export MSYS="NOGLOB"
 
 case "$0" in
 *resolve-paths.lib.sh) main "$@" ;;
