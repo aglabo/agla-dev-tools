@@ -1,4 +1,4 @@
-# src: ./lefthook.yml
+# src: lefthook.yml
 # @(#) : lefthook config
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
@@ -10,7 +10,7 @@ pre-commit:
   parallel: true
   commands:
     betterleaks:
-      run: bash -c "runners/run-betterleaks.sh" --staged
+      run: bash runners/run-betterleaks.sh --staged
 
     secretlint:
       glob: "**/*"

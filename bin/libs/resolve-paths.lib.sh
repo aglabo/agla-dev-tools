@@ -46,7 +46,6 @@ main() {
 }
 
 # Disable glob expansion of arguments by MSYS bash on Windows (exported so child processes inherit it)
-export MSYS="NOGLOB"
 
 case "$0" in
 *resolve-paths.lib.sh) main "$@" ;;

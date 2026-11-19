@@ -1,5 +1,5 @@
-# src: ./.textlintignore
-# @(#) : ignore settings for textlint
+# src: .textlintignore
+# @(#) : textlint ignore settings
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #

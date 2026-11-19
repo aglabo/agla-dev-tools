@@ -1,7 +1,8 @@
 # agla-dev-tools
 
 Development tools management package for aglabo projects.
-It bundles tool wrappers (`bin/`), lint/test runners (`runners/`), shared tool configs (`configs/`), and Git hooks.
+It bundles tool wrappers (`bin/`) and lint/test runners (`runners/`).
+It also provides shared tool configs (`configs/`) and Git hooks.
 
 ---
 

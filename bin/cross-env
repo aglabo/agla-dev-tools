@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+# src: ./bin/cross-env
+# @(#) : Wrapper script for cross-env
+#
+# Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
+#
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+# shellcheck source=/dev/null
+. "$(dirname "$0")/libs/resolve-paths.lib.sh"
+resolve_paths "$(dirname "$0")"
+exec "$BINPATH/cross-env" "$@"
