@@ -39,9 +39,9 @@
     "@commitlint/config-conventional": "^21.2.4",
     "@commitlint/types": "^21.2.3",
     "@ls-lint/ls-lint": "^2.3.2",
-    "@secretlint/secretlint-rule-preset-recommend": "^13.1.0",
     "commitlint": "^21.2.4",
     "concurrently": "^10.0.7",
+    "cross-env": "^10.1.0",
     "rimraf": "^6.1.4",
     "secretlint": "^14.0.1"
   },
