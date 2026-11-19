@@ -85,13 +85,13 @@ get_filelist() {
 
   # Enumerate files; normalize separators and prepend ./
   local __result
-  __result=$(cd "$__root" && rg --files -g "$__pattern" 2> /dev/null | sed 's|\\|/|g; s|^[^./]|./&|' || true)
+  __result=$(cd "$__root" && rg --files -g "$__pattern" 2>/dev/null  | sed 's|\\|/|g; s|^[^./]|./&|' || true)
 
   # Apply each filter (AND: narrow results; short-circuit on empty)
   local __pat
   for __pat in "${__filters[@]}"; do
     [[ -z $__result   ]] && break
-    __result=$(printf '%s\n' "$__result" | rg "$__pat" 2> /dev/null || true)
+    __result=$(printf '%s\n' "$__result" | rg "$__pat" 2>/dev/null  || true)
   done
 
   [[ -z $__result   ]] && return 0

@@ -25,4 +25,4 @@ SCRIPT_ROOT="$(cd "$(dirname "${BASH_SOURCE[1]}")" && pwd)"
 # under <project>/runners/, which breaks for callers such as runners/exec/.
 # The subshell is required: without it `||` would bind to `cd` alone and `pwd`
 # would always run, appending a second line when git succeeds.
-PROJECT_ROOT="${PROJECT_ROOT:-$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --show-toplevel 2> /dev/null || (cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd) )}"
+PROJECT_ROOT="${PROJECT_ROOT:-$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --show-toplevel 2>/dev/null  || (cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd) )}"

@@ -30,7 +30,7 @@ is_windows_host() {
 # @exitcode 0 if wsl.exe is callable, 1 otherwise
 #
 is_wsl_available() {
-  command -v wsl.exe > /dev/null 2>&1
+  command -v wsl.exe >/dev/null  2>&1
 }
 
 #

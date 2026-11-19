@@ -98,7 +98,7 @@ expand_spec_glob() {
   local -a matches
   # Use compgen -G for glob expansion (handles no-match gracefully)
   mapfile -t matches < <(
-    cd "$SPEC_SEARCH_ROOT" && compgen -G "$norm_pattern" 2> /dev/null || true
+    cd "$SPEC_SEARCH_ROOT" && compgen -G "$norm_pattern" 2>/dev/null  || true
   )
 
   local f
