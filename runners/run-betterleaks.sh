@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# src: ./runners/run-betterleaks.sh
+# src: runners/run-betterleaks.sh
 # @(#) : betterleaks runner
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
@@ -25,8 +25,8 @@ readonly CONFIG_GLOBAL_RELPATH='betterleaks.toml'
 # Config file path relative to PROJECT_ROOT
 readonly CONFIG_LOCAL_RELPATH='configs/betterleaks.toml'
 
-# @description Run betterleaks with the global config,
-#              or with the checked-in config when the global one is absent.
+# @description Run betterleaks with the checked-in config,
+#              or with the global config when the checked-in one is absent.
 #              With --staged, scan the staged changes (pre-commit);
 #              otherwise scan each given path (default: the current directory).
 #              Findings are printed with the secret redacted
@@ -38,7 +38,7 @@ readonly CONFIG_LOCAL_RELPATH='configs/betterleaks.toml'
 # @exitcode 78 (EXIT_CONFIG_NOT_FOUND) Config file not found
 main() {
   local staged=0
-  if [[ "${1:-}" == '--staged' ]]; then
+  if [[ ${1:-} == '--staged'   ]]; then
     staged=1
     shift
   fi
@@ -70,7 +70,7 @@ main() {
   fi
 }
 
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+if [[ ${BASH_SOURCE[0]} == "${0}"   ]]; then
   main "$@"
   exit $?
 fi

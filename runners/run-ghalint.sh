@@ -20,13 +20,13 @@ set -euo pipefail
 . "${SCRIPT_ROOT}/libs/utils.lib.sh"
 
 # Config file path relative to the global config directory
-readonly CONFIG_GLOBAL_RELPATH='global-configs/ghalint.yaml'
+readonly CONFIG_GLOBAL_RELPATH='ghalint.yaml'
 
 # Config file path relative to PROJECT_ROOT
 readonly CONFIG_LOCAL_RELPATH='configs/ghalint.yaml'
 
-# @description Run ghalint (run|act) with the global config,
-#              or with the checked-in config when the global one is absent
+# @description Run ghalint (run|act) with the checked-in config,
+#              or with the global config when the checked-in one is absent
 # @arg $1 string Subcommand: run (workflows) or act (actions)
 # @arg $@ string Remaining arguments forwarded to ghalint
 # @stderr Usage on an invalid subcommand; "Error: <not-found message>" when no config file is found
@@ -37,13 +37,13 @@ main() {
   local subcommand="${1:-}"
 
   case "$subcommand" in
-  run | act)
-    shift
-    ;;
-  *)
-    echo "Usage: run-ghalint.sh <run|act> [args...]" >&2
-    return 1
-    ;;
+    run | act)
+      shift
+      ;;
+    *)
+      echo "Usage: run-ghalint.sh <run|act> [args...]" >&2
+      return 1
+      ;;
   esac
 
   local -a args=("$@")
@@ -57,7 +57,7 @@ main() {
   ghalint "$subcommand" --config "$configFile" "${args[@]+"${args[@]}"}"
 }
 
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+if [[ ${BASH_SOURCE[0]} == "${0}"   ]]; then
   main "$@"
   exit $?
 fi
