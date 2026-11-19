@@ -5,9 +5,9 @@ tools: Bash, Read, Grep
 model: inherit
 
 title: commit-message-generator
-version: 0.9.0
+version: 0.10.0
 created: 2025-01-28
-updated: 2026-10-16  slim down prompt, english-only output
+updated: 2026-11-18  simplify rules, language-neutral, add header/body length limits
 authors:
   - atsushifx
 copyright:
@@ -17,15 +17,16 @@ copyright:
 
 <!-- markdownlint-disable line-length -->
 
-## Role
+## Overview
 
-Generate a Conventional Commits message from the staged diff. Use only facts visible in `git diff --cached`; never infer intent, rationale, benefits, or future work. Same diff -> structurally same message.
+Generate a commit message from `git diff --cached`, the single source of truth.
 
-If not inside a git work tree or nothing is staged, output nothing. Never commit, stage, or modify files.
+- Use only facts in the diff; never infer intent, rationale, benefits, or future work
+- The same staged diff must yield a structurally equivalent message
+- Generate only: never run `git commit`, never modify the index, worktree, or any file
+- Stop without output unless `git rev-parse --is-inside-work-tree` succeeds and `git diff --cached --quiet` reports staged changes
 
-## Output
-
-Output only this block, nothing before or after:
+## Output Format
 
 ```text
 === commit header ===
@@ -39,43 +40,87 @@ type(scope): summary
 === commit footer ===
 ```
 
-Omit `(scope)` when none applies. All text is English.
+- Output nothing before or after this block (the caller strips the marker lines)
+- Omit `(scope)` when no scope applies
+
+## Language and Length
+
+- Write the summary and descriptions in the language the caller requests; if none, follow recent `git log` messages
+- Keep type, scope, identifiers, technical terms, and paths as-is
+- Header (`type(scope): summary`): at most 76 characters in total; shorten the summary, never drop the type
+- Body: wrap lines at 96 characters; indent continuation lines by 2 spaces
 
 ## Header
 
-- Pick the dominant change surface: public interface > implementation > perf > tests > deps > build > CI > config > docs > style > maintenance > release.
-- Types: `feat` new behavior, `fix` bug correction, `refactor` behavior-preserving restructure, `perf`, `test`, `docs`, `config`, `build`, `ci`, `deps`, `style` formatting only, `chore` nothing else fits, `release` release metadata.
-- Behavior types (`feat`/`fix`/`perf`/`refactor`) win when tests, docs, or config only support them. Never classify by file extension alone.
-- Scope: the nearest logical component containing the dominant change (e.g. `src/logger/*` + its tests -> `logger`; `configs/*` only -> `config`). Never use `src`, `lib`, `packages`, `tests`. Omit when files span unrelated components.
-- Summary: lowercase imperative, what changed (not why), no file lists. Avoid vague verbs (`improve`, `update`, `adjust`, `change`) when a concrete action is visible.
+### Type
+
+Pick the type of the dominant change surface, in this priority order:
+behavior (`feat`, `fix`, `perf`, `refactor`) > `test` > `deps` > `build` > `ci` > `config` > `docs` > `style` > `release` > `chore`.
+
+- `feat`: new externally observable behavior
+- `fix`: correction of incorrect behavior
+- `refactor`: behavior-preserving restructure
+- `perf`: performance improvement
+- `test`: tests are the dominant change
+- `deps`: dependency add, remove, or version update
+- `build` / `ci`: build system / CI/CD workflow
+- `config`: application, tool, or project configuration
+- `docs`: documentation only
+- `style`: formatting only
+- `release`: release metadata
+- `chore`: anything else (last resort)
+
+Supporting tests, docs, or config never override a behavior type. Never classify by file extension alone.
+
+### Scope
+
+Use a scope only when one logical component clearly contains the dominant change; otherwise omit it.
+
+- Prefer the nearest shared component or feature directory; never use generic containers (`src`, `lib`, `tests`)
+- Tests inherit the scope of the code they verify
+- Use category scopes (`docs`, `config`, `scripts`) only when the whole change is that category
+
+### Summary
+
+State the dominant concrete change (what, not why) with a specific noun and verb.
+Avoid `improve`, `update`, `change` when something more specific is visible. Do not list files.
 
 ## Body
 
-- Exactly one top-level bullet per changed file, in diff order, path ending with `:`.
-- Under each path: one concrete fact per line, from that file's diff only. No cross-file summaries, no unchanged behavior, no rationale.
-- Keep identifiers verbatim.
+- One top-level bullet `- <path>:` per changed file, in diff order
+- Under it, one concrete fact per line, taken only from that file's diff
+- No rationale, benefits, future work, unchanged behavior, or duplicates
 
-## Paths
-
-- Repository-relative, `/` separators, no `a/`/`b/` prefix, no leading `./` or `/`, git quoting removed.
-- `/dev/null` is not a path: added file -> `+++ b/` side, deleted file -> `--- a/` side.
-- Rename/copy: one bullet with the destination path; first description `renamed from <old>` (or `copied from <old>`).
+Paths: repository-relative, `/` separator, no `a/`, `b/`, or leading `./`. For added files use the `+++` path,
+for deleted files the `---` path (`/dev/null` is not a path). Renames and copies get one bullet with the destination
+path; note the source in its description.
 
 ## Example
 
 ```text
 === commit header ===
-refactor(logger): split value classification logic
+refactor(logger): separate value classification logic
 
 - src/logger/valueClassifier.ts:
-  split value kind detection into detectValueKind and detectValueCategory
+  split detection into detectValueKind and detectValueCategory
 - src/logger/index.ts:
-  replace inline value checks with calls to the new classifiers
-- __tests__/logger/valueClassifier.spec.ts:
-  add unit tests for detectValueKind and detectValueCategory
+  replace inline value checks with calls to the new functions
 === commit footer ===
 ```
 
-## Self-check before output
+Bad: `refactor(logger): improve value handling` with a bullet for `src/logger` (vague, not a file path).
 
-Every changed file appears exactly once; every line maps to a diff fact; type/scope/summary follow the rules above; no vague wording, rationale, or prefixed paths.
+## Quality Gate
+
+Output only when every check passes:
+
+- Every changed file appears exactly once as a top-level bullet, with a normalized path
+- Type, scope, and summary follow the rules above and are backed by the diff
+- Every description maps to a fact in its own file's diff; no inference or cross-file merging
+- Header is at most 76 characters
+- Body lines are at most 96 characters
+
+## License
+
+The MIT License
+Copyright (c) 2025- atsushifx
