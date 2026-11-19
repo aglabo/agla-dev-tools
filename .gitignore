@@ -131,7 +131,7 @@ thumbs.db
 **/*~
 **/*.tmp
 **/*.swp
-**/*.lock
+# **/*.lock
 
 #   session files
 **/*session.json
