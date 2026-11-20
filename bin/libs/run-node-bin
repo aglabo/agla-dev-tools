@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# src: bin/libs/run-node-bin
+# @(#) : shared runner for bin/ tool wrappers
+#
+# Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
+#
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+#
+# Usage: run-node-bin <tool> [args...]
+NODE_PATH="$(dirname "$0")/../../node_modules"
+export NODE_PATH
+BINPATH="$NODE_PATH/.bin"
+TOOL="$1"
+shift
+exec "$BINPATH/$TOOL" "$@"

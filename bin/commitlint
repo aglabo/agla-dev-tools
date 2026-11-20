@@ -1,13 +1,9 @@
-#!/usr/bin/env sh
-# src: ./bin/commitlint
-# @(#) : Wrapper script for commitlint
+#!/usr/bin/env bash
+# src: bin/commitlint
+# @(#) : commitlint wrapper (bash)
 #
 # Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
-
-# shellcheck source=/dev/null
-. "$(dirname "$0")/libs/resolve-paths.lib.sh"
-resolve_paths "$(dirname "$0")"
-exec "$BINPATH/commitlint" "$@"
+exec "$(dirname "$0")/libs/run-node-bin" commitlint "$@"

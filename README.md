@@ -10,7 +10,8 @@ It also provides shared tool configs (`configs/`) and Git hooks.
 
 <!-- textlint-disable ja-technical-writing/max-comma -->
 
-- Tool wrappers in `bin/` that resolve pnpm-installed commands (POSIX shell and Windows `.cmd`)
+- Tool wrappers in `bin/` that delegate to the shared runner `bin/libs/run-node-bin`
+  - POSIX shell and Windows `.cmd` (no bash needed on Windows)
   - `commitlint`, `concurrently`, `ls-lint`, `rimraf`, `secretlint`
 - Runner scripts in `runners/` for linting, formatting, and testing
   - `jactionlint`, `ghalint`, `markdownlint`, `shellcheck`, `shellspec`, `shfmt`, `textlint`, `betterleaks`
