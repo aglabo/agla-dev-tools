@@ -1,13 +1,12 @@
 @ECHO off
-:: src: ./bin/concurrently.cmd
-:: @(#) : Wrapper script for concurrently (Windows)
-::
-:: Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
-::
-:: This software is released under the MIT License.
-:: https://opensource.org/licenses/MIT
+REM src: bin/concurrently.cmd
+REM @(#) : concurrently wrapper (cmd)
+REM
+REM Copyright (c) 2026- atsushifx https://github.com/atsushifx
+REM
+REM This software is released under the MIT License.
+REM https://opensource.org/licenses/MIT
 SETLOCAL
-FOR /F "usebackq delims=" %%N IN (`bash "%~dp0libs\resolve-paths.lib.sh" "%~dp0/"`) DO SET "NODE_PATH=%%N"
-SET "BINPATH=%NODE_PATH%\.bin"
-CALL "%BINPATH%\concurrently.CMD" %*
-ENDLOCAL
+SET "TOOL=concurrently"
+CALL "%~dp0libs\run-node-bin.cmd" %*
+ENDLOCAL & EXIT /B %ERRORLEVEL%

@@ -1,13 +1,12 @@
 @ECHO off
-:: src: ./bin/ls-lint.cmd
-:: @(#) : Wrapper script for ls-lint (Windows)
-::
-:: Copyright (c) 2026- atsushifx <https://github.com/atsushifx>
-::
-:: This software is released under the MIT License.
-:: https://opensource.org/licenses/MIT
+REM src: bin/ls-lint.cmd
+REM @(#) : ls-lint wrapper (cmd)
+REM
+REM Copyright (c) 2026- atsushifx https://github.com/atsushifx
+REM
+REM This software is released under the MIT License.
+REM https://opensource.org/licenses/MIT
 SETLOCAL
-FOR /F "usebackq delims=" %%N IN (`bash "%~dp0libs\resolve-paths.lib.sh" "%~dp0/"`) DO SET "NODE_PATH=%%N"
-SET "BINPATH=%NODE_PATH%\.bin"
-CALL "%BINPATH%\ls-lint.CMD" %*
-ENDLOCAL
+SET "TOOL=ls-lint"
+CALL "%~dp0libs\run-node-bin.cmd" %*
+ENDLOCAL & EXIT /B %ERRORLEVEL%
